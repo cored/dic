@@ -1,0 +1,2 @@
+
+YARD-Coverage: 100.0%  Success: 0  Failed: 0  Total: 0
