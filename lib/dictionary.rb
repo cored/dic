@@ -52,7 +52,7 @@ module Dictionary
 
     def create_file(filename, &block)
       File.open(filename, 'w') do |file|
-        Dictionary::Sequences[@content].to_hash.each_pair do |sequence, word|
+        Dictionary::Sequences.new(@content).to_hash.each_pair do |sequence, word|
           yield file, sequence, word
         end
       end

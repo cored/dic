@@ -1,12 +1,8 @@
 module Dictionary
   class Sequences
-    class << self 
-      alias :[] :new
-    end
-
     def initialize(words)
-      @words = Words[words]
-      @values = @words.map { |word| Sequence.in word }
+      @words = Words.new words
+      @values = @words.map { |word| Sequence.new word }
     end
 
     def to_hash
@@ -16,10 +12,6 @@ module Dictionary
     end
 
     class Sequence
-      class << self
-        alias :in :new
-      end
-
       def initialize(word)
         @word = word
         freeze
@@ -42,17 +34,13 @@ module Dictionary
   class Words
     include Enumerable
 
-    class << self
-      alias :[] :new
-    end
-
     def initialize(words)
       @words = words
     end
 
-    def each(&block)
+    def each
       return to_enum unless block_given?
-      @words.each &block 
+      @words.each { |word| yield word }
     end
   end
 end
