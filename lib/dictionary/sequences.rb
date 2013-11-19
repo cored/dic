@@ -51,7 +51,8 @@ module Dictionary
     end
 
     def each(&block)
-      @words.each &block if block_given?
+      return to_enum unless block_given?
+      @words.each &block 
     end
   end
 end
