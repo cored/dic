@@ -2,7 +2,7 @@ module Dictionary
   class Sequences
     def initialize(words)
       @words = Words.new words
-      @values = @words.map { |word| Sequence.new word }
+      @values = @words.map &Sequence
     end
 
     def to_hash
@@ -27,6 +27,10 @@ module Dictionary
         values.each_with_object({}) do |seq, hash|
           hash[seq] = @word
         end
+      end
+
+      def self.to_proc
+        ->(word) { new word } 
       end
     end
   end
